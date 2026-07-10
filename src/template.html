@@ -7,5 +7,32 @@
 </head>
 <body>
     <h1>hello world</h1>
+    <!-- this is to test out the dialog -->
+    <dialog id="dialog">
+        <form method="dialog" id="newTodo">
+            <div id="inputContainer">
+                <label> Title:
+                    <input type="text" id="titleInput" required>
+                </label>
+                <label> Due Date:
+                    <input type="date" id="dueDateInput" required>
+                </label>
+                <label> Description:
+                    <input type="text" id="descriptionInput">
+                </label>
+                <label> Priority:
+                    <select name="priority" id="priorityInput">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </label>
+            </div>
+                <input type="submit" id="submitBtn">
+                <input type="submit" id="closeBtn" value="Close">
+        </form>
+    </dialog>
+    <button id="newTodoBtn">New Todo</button>
+     <script src="modules/todo.js"></script>
 </body>
 </html>
