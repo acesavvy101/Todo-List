@@ -1,13 +1,14 @@
 //webpack runs from index.js so i have to import everything here
 import "./style.css"; 
 import "./template.html";
-import "./modules/todo.js";
-import "./modules/project.js";
+import {createTodo} from "./modules/todo.js";
+import {createProject} from "./modules/project.js";
+import "./modules/display.js"
+import {displayProject} from "./modules/display.js";
 
-//move this to index.js as it combines both the appLogic and displayLogic:
 const todoForm = document.getElementById("newTodo");
 
-todoForm.addEventListener('submit', function(e) {
+todoForm.addEventListener('submit', (e) => {
     e.preventDefault(); //prevent reloading
     
     const todoTitle = document.getElementById("titleInput").value;
@@ -17,7 +18,21 @@ todoForm.addEventListener('submit', function(e) {
 
     createTodo(todoTitle, todoDate, todoPriority, todoDescription); //pass in the input values into the parameter
 
+
         //display the todo after submitting the form
 })
 
+const projectForm = document.getElementById("newProject");
+
+projectForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const projectTitle = document.getElementById("projectTitleInput").value;
+
+    createProject (projectTitle);
+    console.log("project title:" + projectTitle)
+    
+    //display the project after submitting the form
+    displayProject(projectTitle)
+})
 

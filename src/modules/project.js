@@ -9,7 +9,6 @@ newProjectBtn.addEventListener("click", ()=> {
 projectSubmitBtn.addEventListener("click", ()=> {
     //click, then it closes dialog and submits form. the rendering is done when u submit the form!
     projectDialog.close()
-    console.log("the new project is")
 })
 
 projectCloseBtn.addEventListener("click", (e) => {
@@ -31,6 +30,8 @@ function createProject (projectTitle) {
 function storeTodo (projectTitle, todoObject) { 
     projectTitle.todoStorage.push(todoObject)  //add the todoObject inside the todoStorage
 }
+
+export {createProject,storeTodo}
 
 //so later when u make a new todo instance like:
 /*const todo1 = createTodo(mathsHw, 2026/01/01, high, chulio's hw) 

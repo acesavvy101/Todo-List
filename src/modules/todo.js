@@ -17,7 +17,7 @@ closeBtn.addEventListener("click", (e) => {
     dialog.close()
 })
 
-function createTodo (title , dueDate, priority, description) {
+export function createTodo (title , dueDate, priority, description) {
     //for testing: | TO ADD: checklist, edit todo, sort by priority
     console.log("your label is:" + title)
     console.log("your priority is:" + priority)

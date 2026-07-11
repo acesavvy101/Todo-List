@@ -4,7 +4,7 @@
 }
 
 /* Sidebar Styling */
-.sidebar {
+#sidebar {
     position: fixed;
     top: 0;
     left: 0;
@@ -17,7 +17,7 @@
     /* animate this so u can open and close sidebar */
   }
   
-  .sidebarHeader {
+  #sidebarHeader {
     padding-left: 20px;
     margin-bottom: 30px;
     margin-left: 10px;
@@ -28,7 +28,7 @@
     list-style: none;
   }
   
-  .navLinks li a {
+  .navLinks li {
     display: block;
     padding: 15px;
     color: #f1faff;
@@ -37,16 +37,16 @@
     font-family: handwriting;
   }
 
-  .navLinks li a:hover {
+  .navLinks li:hover {
     color: #fff3b2;
     font-size: 35px;
   }
 
-  .navLinks #newProjectBtn a  {
+  .navLinks #newProjectBtn  {
     color: #f283af;
   }
 
-  .navLinks #newProjectBtn a:hover  {
+  .navLinks #newProjectBtn:hover  {
     color: #fff3b2;
     font-size: 35px;
   }
