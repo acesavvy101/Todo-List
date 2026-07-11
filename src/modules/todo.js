@@ -1,4 +1,4 @@
-const newTodoBtn = document.getElementById("newTodoBtn"); //make this in the bottom right of the page
+const newTodoBtn = document.getElementById("newTodoBtn"); 
 const submitBtn = document.getElementById("submitBtn"); 
 const closeBtn = document.getElementById("closeBtn");
 
@@ -17,13 +17,12 @@ closeBtn.addEventListener("click", (e) => {
     dialog.close()
 })
 
-
 function createTodo (title , dueDate, priority, description) {
+    //for testing: | TO ADD: checklist, edit todo, sort by priority
     console.log("your label is:" + title)
     console.log("your priority is:" + priority)
     console.log("your description is:" + description)
     console.log("your due date is:" + dueDate)
-}
 
-//make the "project" and "todo" in seperate modules, then write a func to render display
-//finish functionalities first, then in index.js u combine them together!
+    return {title, dueDate, priority, description}
+}

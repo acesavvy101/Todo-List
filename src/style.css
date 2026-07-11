@@ -42,6 +42,15 @@
     font-size: 35px;
   }
 
+  .navLinks #newProjectBtn a  {
+    color: #f283af;
+  }
+
+  .navLinks #newProjectBtn a:hover  {
+    color: #fff3b2;
+    font-size: 35px;
+  }
+
 #newTodoBtn {
     position: fixed;
     bottom: 40px; /* dist from the bottom of the screen */
@@ -49,6 +58,7 @@
     z-index: 1000; 
     font-family: handwriting;
     background-color: #bddaf4;
+    color: #f283af;
     border-radius: 20px;
     font-size: 20px;
     padding: 10px;
@@ -57,3 +67,4 @@
 #newTodoBtn:hover {
     color: #fff3b2;
 }
+

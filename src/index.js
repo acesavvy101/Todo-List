@@ -1,7 +1,8 @@
 //webpack runs from index.js so i have to import everything here
 import "./style.css"; 
 import "./template.html";
-import "./modules/todo.js"
+import "./modules/todo.js";
+import "./modules/project.js";
 
 //move this to index.js as it combines both the appLogic and displayLogic:
 const todoForm = document.getElementById("newTodo");
@@ -18,3 +19,5 @@ todoForm.addEventListener('submit', function(e) {
 
         //display the todo after submitting the form
 })
+
+

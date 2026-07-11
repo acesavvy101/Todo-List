@@ -13,12 +13,25 @@
           <h3>My Projects</h3>
         </div>
         <ul class="navLinks">
-            <!-- here is where u add new "projects"-->
-          <li><a href="#" class="active">Default</a></li>
+            <!-- here is where u add new "projects", form that takes in title input-->
+            <li id="newProjectBtn"><a href="#" class="active">Add New Project</a></li>
+
+            <li><a href="#" class="active">Default</a></li>
         </ul>
       </nav>
 
-    <!-- this is to test out the dialog -->
+    <!-- New Project Dialog -->
+    <dialog id="projectDialog">
+        <form id="newProject">
+            <label>
+                <input type="text" id="projectTitleInput" required>
+            </label>
+            <input type="submit" id="projectSubmitBtn">
+            <input type="submit" id="projectCloseBtn" value="Close">
+        </form>
+    </dialog>
+    
+    <!-- New Todo Dialog-->
     <dialog id="dialog">
         <form method="dialog" id="newTodo">
             <div id="inputContainer">
