@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <h1>hello world</h1>
+    <!-- here is the sidebar nav -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebarHeader">
+          <h3>My Projects</h3>
+        </div>
+        <ul class="navLinks">
+            <!-- here is where u add new "projects"-->
+          <li><a href="#" class="active">Default</a></li>
+        </ul>
+      </nav>
+
     <!-- this is to test out the dialog -->
     <dialog id="dialog">
         <form method="dialog" id="newTodo">
@@ -32,7 +43,7 @@
                 <input type="submit" id="closeBtn" value="Close">
         </form>
     </dialog>
-    <button id="newTodoBtn">New Todo</button>
-     <script src="modules/todo.js"></script>
+    <button id="newTodoBtn">Add New Todo</button>
+     <script src="modules/todo.js"></script>      <!-- ofc replace this with index.js once we import everything -->
 </body>
 </html>
