@@ -1,9 +1,21 @@
 @font-face {
     font-family: handwriting;
-    src: url(assets/Handwriting-Regular.otf);
+    src: url(assets/Handwriting1.otf);
+}
+@font-face {
+  font-family: handwriting2;
+  src: url(assets/Handwriting2.ttf);
 }
 
 /* Sidebar Styling */
+#sidebarContainer {
+  width: 300px;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
 #sidebar {
     position: fixed;
     top: 0;
@@ -47,9 +59,34 @@
   }
 
   .navLinks #newProjectBtn:hover  {
-    color: #fff3b2;
+    color: #fff3b2; 
     font-size: 35px;
   }
+
+/* Todo Container */
+#todoContainer {
+  margin-left: 350px;
+  margin-top: 40px;
+  width: calc(100% - 400px);   /* basically everything minus the sidebar */
+  min-width: 400px;
+  height: 90vh;
+  border: 2px solid blue;  /* remove later */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#displayTodoBox {
+  font-family: handwriting2;
+  font-size: 15px;
+  border: 2px solid black;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 #newTodoBtn {
     position: fixed;
@@ -68,3 +105,23 @@
     color: #fff3b2;
 }
 
+
+
+/*  margin-left: 300px;
+  width: calc(100% - 300px);   basically everything minus the sidebar 
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  
+  border: 2px solid black;
+  width: 80%;
+  height: 60px;
+  margin-left: 30px;
+  */
+  

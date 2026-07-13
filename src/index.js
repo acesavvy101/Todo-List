@@ -3,8 +3,7 @@ import "./style.css";
 import "./template.html";
 import {createTodo} from "./modules/todo.js";
 import {createProject} from "./modules/project.js";
-import "./modules/display.js"
-import {displayProject} from "./modules/display.js";
+import {displayProject, displayTodo} from "./modules/display.js";
 
 const todoForm = document.getElementById("newTodo");
 
@@ -18,8 +17,8 @@ todoForm.addEventListener('submit', (e) => {
 
     createTodo(todoTitle, todoDate, todoPriority, todoDescription); //pass in the input values into the parameter
 
-
-        //display the todo after submitting the form
+    //display the todo after submitting the form
+    displayTodo(todoTitle,todoDate)
 })
 
 const projectForm = document.getElementById("newProject");

@@ -1,11 +1,7 @@
 //this is where u would dynamically display the todos and 'projects' in the nav
 //u're only adding the display to the things stored inside the array of objects
 
-//create a new project li , and append inside .navLinks
-
-
 const displayProjectBox = document.querySelector(".navLinks");
-
 
 function displayProject (projectTitle) { 
     const displayProjectTitle = document.createElement("li");
@@ -15,6 +11,30 @@ function displayProject (projectTitle) {
 }
 
 export {displayProject, displayProjectBox}
+
+//we should focus on displaying todos first, then how to display todo objects stored in a specific project array
+
+const todoContainer = document.getElementById("todoContainer");
+
+function displayTodo (todoTitle, todoDate, todoPriority, todoChecklist) {
+    const displayTodoBox = document.createElement("div");
+    displayTodoBox.id = "displayTodoBox"
+
+    const displayTodoTitle = document.createElement("p");
+    displayTodoTitle.textContent = todoTitle;
+
+    const displayTodoDate = document.createElement("p");
+    displayTodoDate.textContent = todoDate;
+
+    //ure gna append other p's or divs thats gonna exist inside each todoBox. 
+    displayTodoBox.appendChild(displayTodoTitle);
+    displayTodoBox.appendChild(displayTodoDate);
+
+    todoContainer.appendChild(displayTodoBox);
+}
+
+export {displayTodo, todoContainer}
+
 
 
 
