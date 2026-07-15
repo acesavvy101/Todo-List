@@ -18,24 +18,25 @@ projectCloseBtn.addEventListener("click", (e) => {
 
 //HERE SHOULD CONTAIN THE LOGIC TO STORE THESE TODOS SO THAT I CAN CALL JSON ON IT AND STORE IN A LOCAL STORAGE!
 function createProject (projectTitle) {
-    //each project should have its own set of todo "storage"
-    let todoStorage = [];
+
+    let todoStorage = [];  //each project should have its own set of todo "storage"
 
     //for every project created i also need to add it to the select project options
-    const projectOptions = document.getElementById("selectProject");
+    const projectOptions = document.getElementById("selectProjectInput");
 
     const newProjectOption = new Option(`${projectTitle}`, `${projectTitle}`);
     projectOptions.add(newProjectOption);
 
-    return {
+    return { //this return itself creates a project object by factory func!
         projectTitle,
-        todoStorage //this should contain new objects pushed in storeTodo 
+        todoStorage,
     }
 }
 
-function storeTodo (projectTitle, todoObject) { 
-    projectTitle.todoStorage.push(todoObject)  //add the todoObject inside the todoStorage
+function storeTodo (ProjectObject, todoObject) { 
+    ProjectObject.todoStorage.push(todoObject)  //add the todoObject inside the todoStorage 
 }
 
 export {createProject,storeTodo}
+
 

@@ -104,24 +104,3 @@
 #newTodoBtn:hover {
     color: #fff3b2;
 }
-
-
-
-/*  margin-left: 300px;
-  width: calc(100% - 300px);   basically everything minus the sidebar 
-  height: 100vh;
-  top: 0;
-  left: 0;
-  position: fixed;
-  border: 2px solid blue;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  
-  border: 2px solid black;
-  width: 80%;
-  height: 60px;
-  margin-left: 30px;
-  */
-  
