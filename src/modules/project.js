@@ -21,6 +21,12 @@ function createProject (projectTitle) {
     //each project should have its own set of todo "storage"
     let todoStorage = [];
 
+    //for every project created i also need to add it to the select project options
+    const projectOptions = document.getElementById("selectProject");
+
+    const newProjectOption = new Option(`${projectTitle}`, `${projectTitle}`);
+    projectOptions.add(newProjectOption);
+
     return {
         projectTitle,
         todoStorage //this should contain new objects pushed in storeTodo 
@@ -33,10 +39,3 @@ function storeTodo (projectTitle, todoObject) {
 
 export {createProject,storeTodo}
 
-//so later when u make a new todo instance like:
-/*const todo1 = createTodo(mathsHw, 2026/01/01, high, chulio's hw) 
-u can pass in this instance as an argument like:
-const project1 = createProject ("School")
-const storeTodo1 = (project1 , todo1)
-then the todo1 will be stored as an object inside the todoStorage array created for every project
-*/
