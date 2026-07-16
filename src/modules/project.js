@@ -22,6 +22,8 @@ function createProject (projectTitle) {
     let todoStorage = [];  //each project should have its own set of todo "storage"
 
     //for every project created i also need to add it to the select project options
+
+    //REFACTOR: ADD PROJECT SELECT OPTIONS FROM THE PROJECTOBJECT ARRAY.
     const projectOptions = document.getElementById("selectProjectInput");
 
     const newProjectOption = new Option(`${projectTitle}`, `${projectTitle}`);
