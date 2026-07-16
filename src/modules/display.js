@@ -12,17 +12,20 @@ function displayProject (projectTitle) {
 
 export {displayProject, displayProjectBox}
 
-//we should focus on displaying todos first, then how to display todo objects stored in a specific project array
+//display todo objects stored in a specific project array
 
 const todoContainer = document.getElementById("todoContainer");
 
-function displayTodo (todoTitle, todoDate, todoPriority, todoChecklist) {
+function displayTodo (projectObject) {
     const displayTodoBox = document.createElement("div");
     displayTodoBox.id = "displayTodoBox"
+
+    const todoTitle = projectObject.todoStorage.map(todoItem => todoItem.title);
 
     const displayTodoTitle = document.createElement("p");
     displayTodoTitle.textContent = todoTitle;
 
+    const todoDate = projectObject.todoStorage.map(todoItem => todoItem.dueDate);
     const displayTodoDate = document.createElement("p");
     displayTodoDate.textContent = todoDate;
 
@@ -34,7 +37,4 @@ function displayTodo (todoTitle, todoDate, todoPriority, todoChecklist) {
 }
 
 export {displayTodo, todoContainer}
-
-
-
 

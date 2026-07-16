@@ -43,7 +43,7 @@ todoForm.addEventListener('submit', (e) => {
         console.log(matchedProject.todoStorage) 
 
     //display the todo after submitting the form
-    displayTodo(todoTitle,todoDate)
+    displayTodo(matchedProject)
 })
 
 
