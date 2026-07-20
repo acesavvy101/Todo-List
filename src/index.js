@@ -5,7 +5,6 @@ import {createTodo} from "./modules/todo.js";
 import {createProject, storeTodo} from "./modules/project.js";
 import {displayProject, displayTodo} from "./modules/display.js";
 
-
 const projectForm = document.getElementById("newProject");
 let projectObjects = []
 
@@ -18,7 +17,6 @@ projectForm.addEventListener('submit', (e) => {
     //each project created should be accessible by storeTodo (even past projects), hence we're storing it in an array
     projectObjects.push(newProjectObject)
         
-    
     //display the project after submitting the form
     displayProject(projectTitle)
 })
@@ -27,6 +25,7 @@ const todoForm = document.getElementById("newTodo");
 
 todoForm.addEventListener('submit', (e) => {
     e.preventDefault(); //prevent reloading
+    todoContainer.replaceChildren() //refresh display everytime u submit a new todo
 
     const todoTitle = document.getElementById("titleInput").value;
     const todoDate = document.getElementById("dueDateInput").value;
@@ -38,7 +37,7 @@ todoForm.addEventListener('submit', (e) => {
     
     //compare the selected options to know which was picked 
     const matchedProject = projectObjects.find(project => project.projectTitle === todoProject);
-
+    console.log (matchedProject)
     storeTodo(matchedProject, newTodoItem) 
         console.log(matchedProject.todoStorage) 
 
@@ -46,5 +45,4 @@ todoForm.addEventListener('submit', (e) => {
     displayTodo(matchedProject)
 })
 
-
-
+export {projectObjects}

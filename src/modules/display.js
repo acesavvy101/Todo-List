@@ -17,24 +17,43 @@ export {displayProject, displayProjectBox}
 const todoContainer = document.getElementById("todoContainer");
 
 function displayTodo (projectObject) {
+    projectObject.todoStorage.forEach((todoItem) => { 
     const displayTodoBox = document.createElement("div");
-    displayTodoBox.id = "displayTodoBox"
-
-    const todoTitle = projectObject.todoStorage.map(todoItem => todoItem.title);
-
+    displayTodoBox.className = "displayTodoBox"
+    
+    const todoTitle = todoItem.title; 
     const displayTodoTitle = document.createElement("p");
     displayTodoTitle.textContent = todoTitle;
 
-    const todoDate = projectObject.todoStorage.map(todoItem => todoItem.dueDate);
+    const todoDate = todoItem.dueDate;
     const displayTodoDate = document.createElement("p");
     displayTodoDate.textContent = todoDate;
+
+    const todoProject = todoItem.selectProject;
+    const displayTodoProject = document.createElement("p");
+    displayTodoProject.textContent = todoProject;
 
     //ure gna append other p's or divs thats gonna exist inside each todoBox. 
     displayTodoBox.appendChild(displayTodoTitle);
     displayTodoBox.appendChild(displayTodoDate);
+    displayTodoBox.appendChild(displayTodoProject);
 
     todoContainer.appendChild(displayTodoBox);
+    })
 }
+
 
 export {displayTodo, todoContainer}
 
+/*
+import {projectObjects} from "../index.js" //go up a folder
+import {createProject} from "./project.js";
+
+const getClickedProject = document.querySelector("ul");
+getClickedProject.addEventListener("click", (e) => {
+    const clickedProject = e.target.textContent
+    const matchedProject = projectObjects.find(project => project.projectTitle === clickedProject);
+    
+    todoContainer.replaceChildren()
+})
+*/
