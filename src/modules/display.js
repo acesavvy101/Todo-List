@@ -13,13 +13,21 @@ function displayProject (projectTitle) {
 export {displayProject, displayProjectBox}
 
 //display todo objects stored in a specific project array
-
 const todoContainer = document.getElementById("todoContainer");
+import trashcanIcon from "../assets/trashcanIcon.svg"
 
 function displayTodo (projectObject) {
     projectObject.todoStorage.forEach((todoItem) => { 
     const displayTodoBox = document.createElement("div");
     displayTodoBox.className = "displayTodoBox"
+
+    const displayTodoTitleBox = document.createElement("div");
+    displayTodoTitleBox.className = "displayTodoRight"
+
+    const checkboxBtn = document.createElement('input'); //BUG: everytime display is refreshed, find a way to keep the checkbox display intact
+    checkboxBtn.type = 'checkbox';
+    checkboxBtn.id = 'todoCheckbox';
+    checkboxBtn.value = 'done'; //when its done, turn the value to "done" to mark completed
     
     const todoTitle = todoItem.title; 
     const displayTodoTitle = document.createElement("p");
@@ -33,23 +41,27 @@ function displayTodo (projectObject) {
     const displayTodoProject = document.createElement("p");
     displayTodoProject.textContent = todoProject;
 
+    const deleteBtn = document.createElement("img");
+    deleteBtn.src = trashcanIcon;
+    deleteBtn.id = "trashcanImg"
+
     //ure gna append other p's or divs thats gonna exist inside each todoBox. 
-    displayTodoBox.appendChild(displayTodoTitle);
+    displayTodoTitleBox.appendChild(checkboxBtn);
+    displayTodoTitleBox.appendChild(displayTodoTitle);
+    displayTodoBox.appendChild(displayTodoTitleBox);
     displayTodoBox.appendChild(displayTodoDate);
     displayTodoBox.appendChild(displayTodoProject);
+    displayTodoBox.appendChild(deleteBtn);
 
     todoContainer.appendChild(displayTodoBox);
     })
 }
-
-
 export {displayTodo, todoContainer}
-
 
 import {projectObjects} from "../index.js" //go up a folder
 
-const getClickedProject = document.querySelector("ul");
-console.log(getClickedProject)
+const getClickedProject = document.querySelector("ul"); 
+console.log(getClickedProject) //learning lesson: the fact that this log works means its not a selector error
 
 getClickedProject.addEventListener("click", (e) => {
     if (e.target.textContent === "Add New Project") {
@@ -62,5 +74,7 @@ getClickedProject.addEventListener("click", (e) => {
     displayTodo(matchedProject)
     }
 })
+
+
 
 

@@ -88,6 +88,20 @@
   padding-right: 20px;
 }
 
+.displayTodoRight {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#trashcanImg {
+  height: 20px;
+}
+#trashcanImg:hover {
+  height: 25px;
+}
+
 #newTodoBtn {
     position: fixed;
     bottom: 40px; /* dist from the bottom of the screen */
