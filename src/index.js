@@ -7,6 +7,7 @@ import {displayProject, displayTodo} from "./modules/display.js";
 
 const projectForm = document.getElementById("newProject");
 let projectObjects = []
+console.log(projectObjects)
 
 projectForm.addEventListener('submit', (e) => {
     e.preventDefault();

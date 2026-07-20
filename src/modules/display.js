@@ -45,15 +45,22 @@ function displayTodo (projectObject) {
 
 export {displayTodo, todoContainer}
 
-/*
+
 import {projectObjects} from "../index.js" //go up a folder
-import {createProject} from "./project.js";
 
 const getClickedProject = document.querySelector("ul");
+console.log(getClickedProject)
+
 getClickedProject.addEventListener("click", (e) => {
+    if (e.target.textContent === "Add New Project") {
+        //ignore clicks from a li element if its the add new proj btn
+    } else {
     const clickedProject = e.target.textContent
     const matchedProject = projectObjects.find(project => project.projectTitle === clickedProject);
-    
+    //find a projectObject with the title is the same as clickedProject
     todoContainer.replaceChildren()
+    displayTodo(matchedProject)
+    }
 })
-*/
+
+
