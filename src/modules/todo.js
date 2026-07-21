@@ -17,13 +17,14 @@ closeBtn.addEventListener("click", (e) => {
     dialog.close()
 })
 
-export function createTodo (title , dueDate, priority, description, selectProject) {
+export function createTodo (title , dueDate, priority, description, selectProject, todoID) {
     //for testing: | TO ADD: checklist, edit todo, sort by priority
     console.log("your label is:" + title)
     console.log("your priority is:" + priority)
     console.log("your description is:" + description)
     console.log("your due date is:" + dueDate)
     console.log ("your project is:" + selectProject)
+    todoID = crypto.randomUUID();
 
-    return {title, dueDate, priority, description, selectProject}
+    return {title, dueDate, priority, description, selectProject, todoID}
 }

@@ -47,3 +47,4 @@ todoForm.addEventListener('submit', (e) => {
 })
 
 export {projectObjects}
+
