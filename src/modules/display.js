@@ -27,7 +27,13 @@ function displayTodo (projectObject) {
     const todoTitle = todoItem.title; 
     const displayTodoTitle = document.createElement("p");
     displayTodoTitle.textContent = todoTitle;
-    displayTodoTitle.dataset.id = todoItem.todoID
+    displayTodoTitle.dataset.id = todoItem.todoID;
+
+    if (todoItem.completed === true) {
+        displayTodoTitle.style.textDecoration = 'line-through'
+    } else {
+        displayTodoTitle.style.textDecoration = 'none'
+    }
 
     const todoDate = todoItem.dueDate;
     const displayTodoDate = document.createElement("p");
@@ -39,7 +45,7 @@ function displayTodo (projectObject) {
 
     const deleteBtn = document.createElement("img");
     deleteBtn.src = trashcanIcon;
-    deleteBtn.id = "trashcanImg"
+    deleteBtn.id = "trashcanImg";
 
     //ure gna append other p's or divs thats gonna exist inside each todoBox. 
     displayTodoTitleBox.appendChild(checkboxBtn);
@@ -54,33 +60,16 @@ function displayTodo (projectObject) {
 }
 export {displayTodo, todoContainer}
 
-//display todo items in a project everytime a specific project Object is clicked
-import {projectObjects} from "../index.js" //go up a folder
-const getClickedProject = document.querySelector("ul"); 
-console.log(getClickedProject) //learning lesson: the fact that this log works means its not a selector error
-getClickedProject.addEventListener("click", (e) => {
-    if (e.target.textContent === "Add New Project") {
-        //ignore clicks from a li element if its the add new proj btn
-    } else {
-    const clickedProject = e.target.textContent
-    const matchedProject = projectObjects.find(project => project.projectTitle === clickedProject);
-    //find a projectObject with the title is the same as clickedProject
-    todoContainer.replaceChildren()
-    displayTodo(matchedProject)
-    }
-})
+/*
+const checkedbox = e.target.closest('input[type="checkbox"]');
+if (checkedbox.checked) {
+    crossedout.style.textDecoration = 'line-through'
+} else {
+    crossedout.style.textDecoration = 'none'
+}
+*/
 
-//reading the checkbox state, event delegation (put listner on parent container)
-todoContainer.addEventListener('change', (e) => {
-    const checkedbox = e.target.closest('input[type="checkbox"]');
-    const crossedout = document.querySelector(`p[data-id="${checkedbox.dataset.id}"]`) //get the first p with the same dataset.id as the checkedbox
-
-    if (checkedbox.checked) {
-        crossedout.style.textDecoration = 'line-through'
-    } else {
-        crossedout.style.textDecoration = 'none'
-    }
-    //BUG: everytime display is refreshed, find a way to keep the checkbox display intact
-})
-
-
+function displayCrossedout (todoTitle) {
+    todoTitle.style.textDecoration = 'line-through'
+}
+export {displayCrossedout}

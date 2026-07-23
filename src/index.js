@@ -3,11 +3,11 @@ import "./style.css";
 import "./template.html";
 import {createTodo} from "./modules/todo.js";
 import {createProject, storeTodo} from "./modules/project.js";
-import {displayProject, displayTodo} from "./modules/display.js";
+import {displayProject, displayTodo, displayCrossedout} from "./modules/display.js";
 
 const projectForm = document.getElementById("newProject");
 let projectObjects = []
-console.log(projectObjects)
+let currentProject; //make the default project the first project u created
 
 projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -17,6 +17,7 @@ projectForm.addEventListener('submit', (e) => {
     const newProjectObject = createProject (projectTitle);
     //each project created should be accessible by storeTodo (even past projects), hence we're storing it in an array
     projectObjects.push(newProjectObject)
+    currentProject = newProjectObject //make the default value if no user clicks a project
         
     //display the project after submitting the form
     displayProject(projectTitle)
@@ -46,5 +47,32 @@ todoForm.addEventListener('submit', (e) => {
     displayTodo(matchedProject)
 })
 
-export {projectObjects}
+//display todo items in a project everytime a specific project Object is clicked
+const getClickedProject = document.querySelector("ul"); 
+getClickedProject.addEventListener("click", (e) => {
+    if (e.target.textContent === "Add New Project") {
+        //ignore clicks from a li element if its the add new proj btn
+    } else {
+    const clickedProject = e.target.textContent
+    const matchedProject = projectObjects.find(project => project.projectTitle === clickedProject);
+    currentProject = matchedProject
+    //find a projectObject with the title is the same as clickedProject
+    todoContainer.replaceChildren()
+    displayTodo(matchedProject)
+    }
+})
 
+//reading the checkbox state, event delegation (put listner on parent container) + will optimize later with localStorage
+const todoContainer = document.getElementById("todoContainer");
+todoContainer.addEventListener('change', (e) => {
+    const checkedbox = e.target.closest('input[type="checkbox"]');
+    const crossedout = document.querySelector(`p[data-id="${checkedbox.dataset.id}"]`) //get the first p with the same dataset.id as the checkedbox
+    const completedTodo = currentProject.todoStorage.find(todoItem => todoItem.todoID === checkedbox.dataset.id) //find a project's todoItem that matches with the dataset.id
+
+    if (checkedbox.checked) {
+        completedTodo.completed = true;
+        displayCrossedout(crossedout)
+    } else {
+        completedTodo.completed = false;
+    }
+})
