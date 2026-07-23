@@ -60,16 +60,11 @@ function displayTodo (projectObject) {
 }
 export {displayTodo, todoContainer}
 
-/*
-const checkedbox = e.target.closest('input[type="checkbox"]');
-if (checkedbox.checked) {
-    crossedout.style.textDecoration = 'line-through'
-} else {
-    crossedout.style.textDecoration = 'none'
-}
-*/
-
 function displayCrossedout (todoTitle) {
     todoTitle.style.textDecoration = 'line-through'
 }
-export {displayCrossedout}
+
+function displayNotCrossedout(todoTitle) {
+     todoTitle.style.textDecoration = 'none'
+}
+export {displayCrossedout, displayNotCrossedout}

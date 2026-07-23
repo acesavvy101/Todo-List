@@ -3,7 +3,7 @@ import "./style.css";
 import "./template.html";
 import {createTodo} from "./modules/todo.js";
 import {createProject, storeTodo} from "./modules/project.js";
-import {displayProject, displayTodo, displayCrossedout} from "./modules/display.js";
+import {displayProject, displayTodo, displayCrossedout, displayNotCrossedout} from "./modules/display.js";
 
 const projectForm = document.getElementById("newProject");
 let projectObjects = []
@@ -66,13 +66,14 @@ getClickedProject.addEventListener("click", (e) => {
 const todoContainer = document.getElementById("todoContainer");
 todoContainer.addEventListener('change', (e) => {
     const checkedbox = e.target.closest('input[type="checkbox"]');
-    const crossedout = document.querySelector(`p[data-id="${checkedbox.dataset.id}"]`) //get the first p with the same dataset.id as the checkedbox
+    const checklist = document.querySelector(`p[data-id="${checkedbox.dataset.id}"]`) //get the first p with the same dataset.id as the checkedbox
     const completedTodo = currentProject.todoStorage.find(todoItem => todoItem.todoID === checkedbox.dataset.id) //find a project's todoItem that matches with the dataset.id
 
     if (checkedbox.checked) {
         completedTodo.completed = true;
-        displayCrossedout(crossedout)
+        displayCrossedout(checklist)
     } else {
         completedTodo.completed = false;
+        displayNotCrossedout(checklist)
     }
 })
