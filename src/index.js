@@ -41,7 +41,6 @@ todoForm.addEventListener('submit', (e) => {
     const matchedProject = projectObjects.find(project => project.projectTitle === todoProject);
     console.log (matchedProject)
     storeTodo(matchedProject, newTodoItem) 
-        console.log(matchedProject.todoStorage) 
 
     //display the todo after submitting the form
     displayTodo(matchedProject)
@@ -77,3 +76,16 @@ todoContainer.addEventListener('change', (e) => {
         displayNotCrossedout(checklist)
     }
 })
+
+//deleting a specific todo, event delegation, cus it needs to listen for all the future dom elements
+document.addEventListener('click', (e) => {
+    if (e.target.matches('img')) {
+        const deletedImg = e.target.dataset.id
+        const updatedTodoList = currentProject.todoStorage.filter(todoItem => todoItem.todoID !== deletedImg); //returns an ARRAY everything else but the deleted todo
+        //mutate the currentProject.todoStorage into the array that's in updatedTodoList
+        currentProject.todoStorage = currentProject.todoStorage.filter(todoItem => todoItem.todoID !== deletedImg); 
+        todoContainer.replaceChildren()
+        displayTodo(currentProject)
+    }
+})
+

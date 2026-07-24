@@ -46,6 +46,7 @@ function displayTodo (projectObject) {
     const deleteBtn = document.createElement("img");
     deleteBtn.src = trashcanIcon;
     deleteBtn.id = "trashcanImg";
+    deleteBtn.dataset.id = todoItem.todoID;
 
     //ure gna append other p's or divs thats gonna exist inside each todoBox. 
     displayTodoTitleBox.appendChild(checkboxBtn);
