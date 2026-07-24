@@ -1,10 +1,19 @@
 //display projects
 const displayProjectBox = document.querySelector(".navLinks");
-function displayProject (projectTitle) { 
+function displayProject (projectObjects) { 
+    displayProjectBox.replaceChildren(displayProjectBox.firstElementChild) //remove duplicates,but keeps the add new proj btn
+    
+    projectObjects.forEach((projectObject) => {
     const displayProjectTitle = document.createElement("li");
-    displayProjectTitle.textContent = projectTitle
+    displayProjectTitle.textContent = projectObject.projectTitle;
+
+    const deleteBtn = document.createElement("img");
+    deleteBtn.src = trashcanIcon;
+    deleteBtn.id = "trashcanImgProject";
 
     displayProjectBox.appendChild(displayProjectTitle);
+    displayProjectTitle.appendChild(deleteBtn);
+    })
 }
 export {displayProject, displayProjectBox}
 
