@@ -17,7 +17,8 @@ projectCloseBtn.addEventListener("click", (e) => {
 })
 
 //HERE SHOULD CONTAIN THE LOGIC TO STORE THESE TODOS SO THAT I CAN CALL JSON ON IT AND STORE IN A LOCAL STORAGE!
-function createProject (projectTitle) {
+function createProject (projectTitle, projectID) {
+    projectID = crypto.randomUUID();
 
     let todoStorage = [];  //each project should have its own set of todo "storage"
 
@@ -30,8 +31,7 @@ function createProject (projectTitle) {
     projectOptions.add(newProjectOption);
 
     return { //this return itself creates a project object by factory func!
-        projectTitle,
-        todoStorage,
+        projectTitle, todoStorage, projectID
     }
 }
 

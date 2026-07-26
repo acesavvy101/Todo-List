@@ -17,10 +17,11 @@ projectForm.addEventListener('submit', (e) => {
     const newProjectObject = createProject (projectTitle);
     //each project created should be accessible by storeTodo (even past projects), hence we're storing it in an array
     projectObjects.push(newProjectObject)
+
     currentProject = newProjectObject //make the default value if no user clicks a project
         
     //display the project after submitting the form
-    displayProject(projectTitle)
+    displayProject(projectObjects)
 })
 
 const todoForm = document.getElementById("newTodo");
@@ -49,15 +50,14 @@ todoForm.addEventListener('submit', (e) => {
 //display todo items in a project everytime a specific project Object is clicked
 const getClickedProject = document.querySelector("ul"); 
 getClickedProject.addEventListener("click", (e) => {
-    if (e.target.textContent === "Add New Project") {
-        //ignore clicks from a li element if its the add new proj btn
+    if ((e.target.textContent === "Add New Project") || (e.target.closest('#trashcanImgProject'))) {
+        //ignore clicks from a li element if its the add new proj btn or deletebtnproject
     } else {
-    const clickedProject = e.target.textContent
-    const matchedProject = projectObjects.find(project => project.projectTitle === clickedProject);
+        const clickedProject = e.target.textContent
+        const matchedProject = projectObjects.find(project => project.projectTitle === clickedProject);
     currentProject = matchedProject
-    //find a projectObject with the title is the same as clickedProject
     todoContainer.replaceChildren()
-    displayTodo(matchedProject)
+    displayTodo(matchedProject) 
     }
 })
 
@@ -79,13 +79,20 @@ todoContainer.addEventListener('change', (e) => {
 
 //deleting a specific todo, event delegation, cus it needs to listen for all the future dom elements
 document.addEventListener('click', (e) => {
-    if (e.target.matches('img')) {
+    if (e.target.matches('img') && e.target.closest('#trashcanImg')) {
         const deletedImg = e.target.dataset.id
         const updatedTodoList = currentProject.todoStorage.filter(todoItem => todoItem.todoID !== deletedImg); //returns an ARRAY everything else but the deleted todo
         //mutate the currentProject.todoStorage into the array that's in updatedTodoList
         currentProject.todoStorage = currentProject.todoStorage.filter(todoItem => todoItem.todoID !== deletedImg); 
         todoContainer.replaceChildren()
         displayTodo(currentProject)
+    } 
+    //deleting a specific proj
+    else if (e.target.matches('img') && e.target.closest('#trashcanImgProject')) {
+        const displayProjectBox = document.querySelector(".navLinks");
+        const deletedImg = e.target.dataset.id
+        projectObjects = projectObjects.filter(projectObject=> projectObject.projectID !== deletedImg); //reassign projectObjects as the filtered result
+        displayProjectBox.replaceChildren(displayProjectBox.firstElementChild) //keeps the btn
+        displayProject(projectObjects)
     }
 })
-

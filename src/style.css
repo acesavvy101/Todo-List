@@ -98,6 +98,12 @@
 #trashcanImg {
   height: 20px;
 }
+
+#trashcanImgProject {
+  height: 20px;
+  margin-left: 15px;
+}
+
 #trashcanImg:hover {
   height: 25px;
 }
