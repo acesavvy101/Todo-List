@@ -22,8 +22,8 @@ export {displayProject, displayProjectBox}
 
 //display todo objects stored in a specific project array
 const todoContainer = document.getElementById("todoContainer");
-import trashcanIcon from "../assets/trashcanIcon.svg"
-import PlaceholderIcon from "../assets/PlaceholderIcon.png";
+import trashcanIcon from "../assets/images/trashcanIcon.svg";
+import PlaceholderIcon from "../assets/images/PlaceholderIcon.png";
 function displayTodo (projectObject) {
     if (projectObject.todoStorage.length === 0) {
         const Placeholder = document.createElement('img');

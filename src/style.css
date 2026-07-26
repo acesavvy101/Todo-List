@@ -7,6 +7,19 @@
   src: url(assets/Handwriting2.ttf);
 }
 
+:root {
+--vibrant-blue: #4D6ff4;
+--vibrant-pink: #ff76b7;
+--pale-pink : #f283af;
+--pale-yellow: #fff3b2;
+--pale-purple: #ecdff7;
+}
+
+body {
+  background-image: url(assets/images/yellowGridBg.jpg);
+  background-position: center;
+}
+
 /* Sidebar Styling */
 #sidebarContainer {
   width: 300px;
@@ -22,7 +35,7 @@
     left: 0;
     height: 100vh;
     width: 300px;
-    background-color: #bddaf4;
+    background-color: var(--vibrant-blue);
     color: #f1faff;
     padding-top: 50px;
     font-family: handwriting;
@@ -43,23 +56,23 @@
   .navLinks li {
     display: block;
     padding: 15px;
-    color: #f1faff;
+    color: var(--pale-purple);
     text-decoration: none;
     font-size: 30px;
     font-family: handwriting;
   }
 
   .navLinks li:hover {
-    color: #fff3b2;
+    color: var(--pale-yellow);
     font-size: 35px;
   }
 
   .navLinks #newProjectBtn  {
-    color: #f283af;
+    color: var(--pale-pink);
   }
 
   .navLinks #newProjectBtn:hover  {
-    color: #fff3b2; 
+    color: var(--pale-yellow);
     font-size: 35px;
   }
 
@@ -85,6 +98,8 @@
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
+  background-color: var(--vibrant-pink);
+  color: var(--pale-yellow)
 }
 
 .displayTodoRight {
@@ -113,13 +128,13 @@
     right: 40px;  
     z-index: 1000; 
     font-family: handwriting;
-    background-color: #bddaf4;
-    color: #f283af;
+    background-color: var(--vibrant-blue);
+    color: var(--pale-yellow);
     border-radius: 20px;
     font-size: 20px;
     padding: 10px;
 }
 
 #newTodoBtn:hover {
-    color: #fff3b2;
+    color: var(--pale-pink)
 }
