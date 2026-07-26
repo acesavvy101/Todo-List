@@ -70,7 +70,6 @@
   width: calc(100% - 400px);   /* basically everything minus the sidebar */
   min-width: 400px;
   height: 90vh;
-  border: 2px solid blue;  /* remove later */
   display: flex;
   flex-direction: column;
   gap: 20px;

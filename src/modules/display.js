@@ -3,72 +3,81 @@ const displayProjectBox = document.querySelector(".navLinks");
 function displayProject (projectObjects) { 
     displayProjectBox.replaceChildren(displayProjectBox.firstElementChild) //remove duplicates,but keeps the add new proj btn
 
-    projectObjects.forEach((projectObject) => {
-    const displayProjectTitle = document.createElement("li");
-    displayProjectTitle.textContent = projectObject.projectTitle;
+        projectObjects.forEach((projectObject) => {
+            const displayProjectTitle = document.createElement("li");
+            displayProjectTitle.textContent = projectObject.projectTitle;
+        
+            const deleteBtn = document.createElement("img");
+            deleteBtn.src = trashcanIcon;
+            deleteBtn.id = "trashcanImgProject";
+            deleteBtn.dataset.id = projectObject.projectID;
+            deleteBtn.value = projectObject.projectTitle;
+        
+            displayProjectBox.appendChild(displayProjectTitle);
+            displayProjectTitle.appendChild(deleteBtn);
+            })
 
-    const deleteBtn = document.createElement("img");
-    deleteBtn.src = trashcanIcon;
-    deleteBtn.id = "trashcanImgProject";
-    deleteBtn.dataset.id = projectObject.projectID;
-    deleteBtn.value = projectObject.projectTitle;
-
-    displayProjectBox.appendChild(displayProjectTitle);
-    displayProjectTitle.appendChild(deleteBtn);
-    })
 }
 export {displayProject, displayProjectBox}
 
 //display todo objects stored in a specific project array
 const todoContainer = document.getElementById("todoContainer");
 import trashcanIcon from "../assets/trashcanIcon.svg"
+import PlaceholderIcon from "../assets/PlaceholderIcon.png";
 function displayTodo (projectObject) {
-    projectObject.todoStorage.forEach((todoItem) => { 
-    const displayTodoBox = document.createElement("div");
-    displayTodoBox.className = "displayTodoBox"
-
-    const displayTodoTitleBox = document.createElement("div");
-    displayTodoTitleBox.className = "displayTodoRight"
-
-    const checkboxBtn = document.createElement('input'); 
-    checkboxBtn.type = 'checkbox';
-    checkboxBtn.className = 'todoCheckbox';
-    checkboxBtn.dataset.id = todoItem.todoID;
-    
-    const todoTitle = todoItem.title; 
-    const displayTodoTitle = document.createElement("p");
-    displayTodoTitle.textContent = todoTitle;
-    displayTodoTitle.dataset.id = todoItem.todoID;
-
-    if (todoItem.completed === true) {
-        displayTodoTitle.style.textDecoration = 'line-through'
+    if (projectObject.todoStorage.length === 0) {
+        const Placeholder = document.createElement('img');
+        Placeholder.src = PlaceholderIcon;
+        todoContainer.appendChild(Placeholder);
     } else {
-        displayTodoTitle.style.textDecoration = 'none'
+        projectObject.todoStorage.forEach((todoItem) => { 
+            const displayTodoBox = document.createElement("div");
+            displayTodoBox.className = "displayTodoBox"
+        
+            const displayTodoTitleBox = document.createElement("div");
+            displayTodoTitleBox.className = "displayTodoRight"
+        
+            const checkboxBtn = document.createElement('input'); 
+            checkboxBtn.type = 'checkbox';
+            checkboxBtn.className = 'todoCheckbox';
+            checkboxBtn.dataset.id = todoItem.todoID;
+            
+            const todoTitle = todoItem.title; 
+            const displayTodoTitle = document.createElement("p");
+            displayTodoTitle.textContent = todoTitle;
+            displayTodoTitle.dataset.id = todoItem.todoID;
+        
+            if (todoItem.completed === true) {
+                displayTodoTitle.style.textDecoration = 'line-through'
+            } else {
+                displayTodoTitle.style.textDecoration = 'none'
+            }
+        
+            const todoDate = todoItem.dueDate;
+            const displayTodoDate = document.createElement("p");
+            displayTodoDate.textContent = todoDate;
+        
+            const todoProject = todoItem.selectProject;
+            const displayTodoProject = document.createElement("p");
+            displayTodoProject.textContent = todoProject;
+        
+            const deleteBtn = document.createElement("img");
+            deleteBtn.src = trashcanIcon;
+            deleteBtn.id = "trashcanImg";
+            deleteBtn.dataset.id = todoItem.todoID;
+        
+            //ure gna append other p's or divs thats gonna exist inside each todoBox. 
+            displayTodoTitleBox.appendChild(checkboxBtn);
+            displayTodoTitleBox.appendChild(displayTodoTitle);
+            displayTodoBox.appendChild(displayTodoTitleBox);
+            displayTodoBox.appendChild(displayTodoDate);
+            displayTodoBox.appendChild(displayTodoProject);
+            displayTodoBox.appendChild(deleteBtn);
+        
+            todoContainer.appendChild(displayTodoBox);
+            })
     }
-
-    const todoDate = todoItem.dueDate;
-    const displayTodoDate = document.createElement("p");
-    displayTodoDate.textContent = todoDate;
-
-    const todoProject = todoItem.selectProject;
-    const displayTodoProject = document.createElement("p");
-    displayTodoProject.textContent = todoProject;
-
-    const deleteBtn = document.createElement("img");
-    deleteBtn.src = trashcanIcon;
-    deleteBtn.id = "trashcanImg";
-    deleteBtn.dataset.id = todoItem.todoID;
-
-    //ure gna append other p's or divs thats gonna exist inside each todoBox. 
-    displayTodoTitleBox.appendChild(checkboxBtn);
-    displayTodoTitleBox.appendChild(displayTodoTitle);
-    displayTodoBox.appendChild(displayTodoTitleBox);
-    displayTodoBox.appendChild(displayTodoDate);
-    displayTodoBox.appendChild(displayTodoProject);
-    displayTodoBox.appendChild(deleteBtn);
-
-    todoContainer.appendChild(displayTodoBox);
-    })
+   
 }
 export {displayTodo, todoContainer}
 
@@ -80,3 +89,12 @@ function displayNotCrossedout(todoTitle) {
      todoTitle.style.textDecoration = 'none'
 }
 export {displayCrossedout, displayNotCrossedout}
+
+//when a project has no todos, it should default to displaying an image/text "add ur todos here"
+export function displayInstructions () {
+    //add a default image to todo Container
+    const Placeholder = document.createElement('img');
+    Placeholder.src = PlaceholderIcon;
+    todoContainer.appendChild(Placeholder)
+}
+displayInstructions(); //call it once in the beginning before adding any todos

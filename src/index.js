@@ -3,7 +3,7 @@ import "./style.css";
 import "./template.html";
 import {createTodo} from "./modules/todo.js";
 import {createProject, storeTodo} from "./modules/project.js";
-import {displayProject, displayTodo, displayCrossedout, displayNotCrossedout} from "./modules/display.js";
+import {displayProject, displayTodo, displayCrossedout, displayNotCrossedout, displayInstructions} from "./modules/display.js";
 
 const projectForm = document.getElementById("newProject");
 let projectObjects = []
@@ -100,5 +100,6 @@ document.addEventListener('click', (e) => {
         const optionToDelete = projectOptions.querySelector(`option[value = "${deletedOption}"]`).remove();
         //all the todos in the display should also be deleted/cleared
         todoContainer.replaceChildren()
+        displayInstructions()
     }
 })
