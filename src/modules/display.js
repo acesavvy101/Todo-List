@@ -11,6 +11,7 @@ function displayProject (projectObjects) {
     deleteBtn.src = trashcanIcon;
     deleteBtn.id = "trashcanImgProject";
     deleteBtn.dataset.id = projectObject.projectID;
+    deleteBtn.value = projectObject.projectTitle;
 
     displayProjectBox.appendChild(displayProjectTitle);
     displayProjectTitle.appendChild(deleteBtn);

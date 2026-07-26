@@ -40,5 +40,3 @@ function storeTodo (ProjectObject, todoObject) {
 }
 
 export {createProject,storeTodo}
-
-

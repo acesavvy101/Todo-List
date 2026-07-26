@@ -94,5 +94,9 @@ document.addEventListener('click', (e) => {
         projectObjects = projectObjects.filter(projectObject=> projectObject.projectID !== deletedImg); //reassign projectObjects as the filtered result
         displayProjectBox.replaceChildren(displayProjectBox.firstElementChild) //keeps the btn
         displayProject(projectObjects)
+        //this should also delete the options in the new todo form | delete the option that matches the title
+        const deletedOption = e.target.value
+        const projectOptions = document.getElementById("selectProjectInput");
+        const optionToDelete = projectOptions.querySelector(`option[value = "${deletedOption}"]`).remove();
     }
 })
