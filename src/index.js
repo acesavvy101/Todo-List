@@ -98,5 +98,7 @@ document.addEventListener('click', (e) => {
         const deletedOption = e.target.value
         const projectOptions = document.getElementById("selectProjectInput");
         const optionToDelete = projectOptions.querySelector(`option[value = "${deletedOption}"]`).remove();
+        //all the todos in the display should also be deleted/cleared
+        todoContainer.replaceChildren()
     }
 })
