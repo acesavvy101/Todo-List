@@ -5,7 +5,6 @@ import {createTodo} from "./modules/todo.js";
 import {createProject, storeTodo} from "./modules/project.js";
 import {displayProject, displayTodo, displayCrossedout, displayNotCrossedout, displayInstructions} from "./modules/display.js";
 
-// localStorage.clear()
 const projectForm = document.getElementById("newProject");
 let projectObjects = []
 let currentProject; //make the default project the first project u created
@@ -44,6 +43,7 @@ todoForm.addEventListener('submit', (e) => {
     const matchedProject = projectObjects.find(project => project.projectTitle === todoProject);
     console.log (matchedProject)
     storeTodo(matchedProject, newTodoItem) 
+    saveToStorage("projects", projectObjects); //also saves the todoStorage in each projobj
 
     //display the todo after submitting the form
     displayTodo(matchedProject)
@@ -86,6 +86,7 @@ document.addEventListener('click', (e) => {
         const updatedTodoList = currentProject.todoStorage.filter(todoItem => todoItem.todoID !== deletedImg); //returns an ARRAY everything else but the deleted todo
         //mutate the currentProject.todoStorage into the array that's in updatedTodoList
         currentProject.todoStorage = currentProject.todoStorage.filter(todoItem => todoItem.todoID !== deletedImg); 
+        saveToStorage("projects", projectObjects); //so localStorage matches the new data after deleting
         todoContainer.replaceChildren()
         displayTodo(currentProject)
     } 
@@ -121,8 +122,19 @@ function getFromStorage (key) {
     return storedObjects //so i can access
 }
 
-const savedProjects = getFromStorage("projects");
-if (savedProjects) {
-    displayProject(savedProjects)
-    displayTodo(savedProjects[0])
+projectObjects = getFromStorage("projects"); //REASSIGN and restore past saved data after refresh so click events can find projects
+if (projectObjects) {
+    displayProject(projectObjects)
+    loadSavedProjects() //wait for the projectObjects to retrieve data first, this should run before displayTodo() or else it'll never reach it cus undefined
+    displayTodo(currentProject) //earlier this was undefined cus its waiting for a click event to fire
+}
+
+function loadSavedProjects(){
+    const projectOptions = document.getElementById("selectProjectInput");
+    projectObjects.forEach((project) => {
+        const reloadOptions = document.createElement('option');
+        reloadOptions.value = project.projectTitle;
+        reloadOptions.textContent = project.projectTitle;
+        projectOptions.appendChild(reloadOptions);
+    });
 }
