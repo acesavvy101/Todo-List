@@ -5,18 +5,20 @@ import {createTodo} from "./modules/todo.js";
 import {createProject, storeTodo} from "./modules/project.js";
 import {displayProject, displayTodo, displayCrossedout, displayNotCrossedout, displayInstructions} from "./modules/display.js";
 
+// localStorage.clear()
 const projectForm = document.getElementById("newProject");
 let projectObjects = []
 let currentProject; //make the default project the first project u created
 
 projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
+   
     const projectTitle = document.getElementById("projectTitleInput").value;
 
     const newProjectObject = createProject (projectTitle);
     //each project created should be accessible by storeTodo (even past projects), hence we're storing it in an array
     projectObjects.push(newProjectObject)
+    saveToStorage("projects", projectObjects);
 
     currentProject = newProjectObject //make the default value if no user clicks a project
         
@@ -92,14 +94,35 @@ document.addEventListener('click', (e) => {
         const displayProjectBox = document.querySelector(".navLinks");
         const deletedImg = e.target.dataset.id
         projectObjects = projectObjects.filter(projectObject=> projectObject.projectID !== deletedImg); //reassign projectObjects as the filtered result
+        saveToStorage("projects", projectObjects); //so localStorage matches the new data after deleting
+
         displayProjectBox.replaceChildren(displayProjectBox.firstElementChild) //keeps the btn
         displayProject(projectObjects)
         //this should also delete the options in the new todo form | delete the option that matches the title
         const deletedOption = e.target.value
         const projectOptions = document.getElementById("selectProjectInput");
-        const optionToDelete = projectOptions.querySelector(`option[value = "${deletedOption}"]`).remove();
+        projectOptions.querySelector(`option[value = "${deletedOption}"]`).remove();
         //all the todos in the display should also be deleted/cleared
         todoContainer.replaceChildren()
         displayInstructions()
     }
 })
+
+//write a func that saves projects n todos data to localStorage everytime sth is created
+function saveToStorage (key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+
+//another func that looks for data in localStorage when app is first loaded
+function getFromStorage (key) {
+    const storedObjects = JSON.parse(localStorage.getItem(key));
+    console.log(storedObjects);
+    console.log(storedObjects[0].todoStorage)
+    return storedObjects //so i can access
+}
+
+const savedProjects = getFromStorage("projects");
+if (savedProjects) {
+    displayProject(savedProjects)
+    displayTodo(savedProjects[0])
+}
