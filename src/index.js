@@ -11,12 +11,13 @@ let currentProject; //make the default project the first project u created
 
 projectForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
+   
     const projectTitle = document.getElementById("projectTitleInput").value;
 
     const newProjectObject = createProject (projectTitle);
     //each project created should be accessible by storeTodo (even past projects), hence we're storing it in an array
     projectObjects.push(newProjectObject)
+    saveToStorage("projects", projectObjects);
 
     currentProject = newProjectObject //make the default value if no user clicks a project
         
@@ -42,6 +43,7 @@ todoForm.addEventListener('submit', (e) => {
     const matchedProject = projectObjects.find(project => project.projectTitle === todoProject);
     console.log (matchedProject)
     storeTodo(matchedProject, newTodoItem) 
+    saveToStorage("projects", projectObjects); //also saves the todoStorage in each projobj
 
     //display the todo after submitting the form
     displayTodo(matchedProject)
@@ -75,6 +77,8 @@ todoContainer.addEventListener('change', (e) => {
         completedTodo.completed = false;
         displayNotCrossedout(checklist)
     }
+
+    saveToStorage("projects", projectObjects); //ADD THIS TO SAVE STATE OF CHECKLIST
 })
 
 //deleting a specific todo, event delegation, cus it needs to listen for all the future dom elements
@@ -84,6 +88,7 @@ document.addEventListener('click', (e) => {
         const updatedTodoList = currentProject.todoStorage.filter(todoItem => todoItem.todoID !== deletedImg); //returns an ARRAY everything else but the deleted todo
         //mutate the currentProject.todoStorage into the array that's in updatedTodoList
         currentProject.todoStorage = currentProject.todoStorage.filter(todoItem => todoItem.todoID !== deletedImg); 
+        saveToStorage("projects", projectObjects); //so localStorage matches the new data after deleting
         todoContainer.replaceChildren()
         displayTodo(currentProject)
     } 
@@ -92,14 +97,46 @@ document.addEventListener('click', (e) => {
         const displayProjectBox = document.querySelector(".navLinks");
         const deletedImg = e.target.dataset.id
         projectObjects = projectObjects.filter(projectObject=> projectObject.projectID !== deletedImg); //reassign projectObjects as the filtered result
+        saveToStorage("projects", projectObjects); //so localStorage matches the new data after deleting
+
         displayProjectBox.replaceChildren(displayProjectBox.firstElementChild) //keeps the btn
         displayProject(projectObjects)
         //this should also delete the options in the new todo form | delete the option that matches the title
         const deletedOption = e.target.value
         const projectOptions = document.getElementById("selectProjectInput");
-        const optionToDelete = projectOptions.querySelector(`option[value = "${deletedOption}"]`).remove();
+        projectOptions.querySelector(`option[value = "${deletedOption}"]`).remove();
         //all the todos in the display should also be deleted/cleared
         todoContainer.replaceChildren()
         displayInstructions()
     }
 })
+
+//write a func that saves projects n todos data to localStorage everytime sth is created
+function saveToStorage (key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+
+//another func that looks for data in localStorage when app is first loaded
+function getFromStorage (key) {
+    const storedObjects = JSON.parse(localStorage.getItem(key));
+    console.log(storedObjects);
+    console.log(storedObjects[0].todoStorage)
+    return storedObjects //so i can access
+}
+
+projectObjects = getFromStorage("projects"); //REASSIGN and restore past saved data after refresh so click events can find projects
+if (projectObjects) {
+    displayProject(projectObjects)
+    loadSavedProjects() //wait for the projectObjects to retrieve data first, this should run before displayTodo() or else it'll never reach it cus undefined
+    displayTodo(currentProject) //earlier this was undefined cus its waiting for a click event to fire
+}
+
+function loadSavedProjects(){
+    const projectOptions = document.getElementById("selectProjectInput");
+    projectObjects.forEach((project) => {
+        const reloadOptions = document.createElement('option');
+        reloadOptions.value = project.projectTitle;
+        reloadOptions.textContent = project.projectTitle;
+        projectOptions.appendChild(reloadOptions);
+    });
+}
