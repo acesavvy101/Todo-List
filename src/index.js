@@ -77,6 +77,8 @@ todoContainer.addEventListener('change', (e) => {
         completedTodo.completed = false;
         displayNotCrossedout(checklist)
     }
+
+    saveToStorage("projects", projectObjects); //ADD THIS TO SAVE STATE OF CHECKLIST
 })
 
 //deleting a specific todo, event delegation, cus it needs to listen for all the future dom elements
