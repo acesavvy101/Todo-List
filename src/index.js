@@ -41,7 +41,6 @@ todoForm.addEventListener('submit', (e) => {
     
     //compare the selected options to know which was picked 
     const matchedProject = projectObjects.find(project => project.projectTitle === todoProject);
-    console.log (matchedProject)
     storeTodo(matchedProject, newTodoItem) 
     saveToStorage("projects", projectObjects); //also saves the todoStorage in each projobj
 
@@ -119,8 +118,6 @@ function saveToStorage (key, data) {
 //another func that looks for data in localStorage when app is first loaded
 function getFromStorage (key) {
     const storedObjects = JSON.parse(localStorage.getItem(key));
-    console.log(storedObjects);
-    console.log(storedObjects[0].todoStorage)
     return storedObjects //so i can access
 }
 
