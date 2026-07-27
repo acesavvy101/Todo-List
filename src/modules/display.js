@@ -24,6 +24,7 @@ export {displayProject, displayProjectBox}
 const todoContainer = document.getElementById("todoContainer");
 import trashcanIcon from "../assets/images/trashcanIcon.svg";
 import PlaceholderIcon from "../assets/images/PlaceholderIcon.png";
+import Instructions from "../assets/images/Instructions.png";
 function displayTodo (projectObject) {
     if (projectObject.todoStorage.length === 0) {
         const Placeholder = document.createElement('img');
@@ -93,8 +94,9 @@ export {displayCrossedout, displayNotCrossedout}
 //when a project has no todos, it should default to displaying an image/text "add ur todos here"
 export function displayInstructions () {
     //add a default image to todo Container
-    const Placeholder = document.createElement('img');
-    Placeholder.src = PlaceholderIcon;
-    todoContainer.appendChild(Placeholder)
+    const displayInstructions = document.createElement('img');
+    displayInstructions.src = Instructions;
+    displayInstructions.id = "Instructions";
+    todoContainer.appendChild(displayInstructions);
 }
 displayInstructions(); //call it once in the beginning before adding any todos

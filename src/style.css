@@ -138,3 +138,10 @@ body {
 #newTodoBtn:hover {
     color: var(--pale-pink)
 }
+
+#Instructions {
+  height: 300px;
+  width: 600px;
+  margin-top: 200px;
+  margin-left: 200px;
+}
