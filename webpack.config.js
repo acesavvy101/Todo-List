@@ -11,6 +11,10 @@ export default {
     clean: true,
     publicPath: "auto",
   },
+  optimization: {
+    splitChunks: false,
+    runtimeChunk: false,
+  },
   devtool: "eval-source-map",
   devServer: {
     watchFiles: ["./src/template.html"],
