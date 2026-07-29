@@ -121,8 +121,11 @@ function getFromStorage (key) {
     return storedObjects //so i can access
 }
 
-projectObjects = getFromStorage("projects"); //REASSIGN and restore past saved data after refresh so click events can find projects
-if (projectObjects) {
+//add null checking! (when a user first loads the app, the localStorage is empty (null) so it tried to .push a null value!)
+const savedProjects = getFromStorage("projects");
+if (savedProjects) {
+    projectObjects = savedProjects //REASSIGN and restore past saved data after refresh so click events can find projects
+
     displayProject(projectObjects)
     loadSavedProjects() //wait for the projectObjects to retrieve data first, this should run before displayTodo() or else it'll never reach it cus undefined
     displayTodo(currentProject) //earlier this was undefined cus its waiting for a click event to fire
